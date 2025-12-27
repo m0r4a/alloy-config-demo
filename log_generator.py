@@ -40,40 +40,73 @@ FAILED_DETAILS = [
 ]
 
 
-def generate_transaction_log():
-    fecha = datetime.now().strftime("%Y-%m-%d")
-    hora_inicio = datetime.now()
-    latencia_ms = random.randint(10, 5000)
-    hora_final = hora_inicio + timedelta(milliseconds=latencia_ms)
-    hora_inicio_str = hora_inicio.strftime("%H:%M:%S.%f")[:-3]
-    hora_final_str = hora_final.strftime("%H:%M:%S.%f")[:-3]
-    metodo = random.choice(METHODS)
+def generate_transaction_data():
+    date = datetime.now().strftime("%Y-%m-%d")
+    start_time = datetime.now()
+    latency_ms = random.randint(10, 5000)
+    end_time = start_time + timedelta(milliseconds=latency_ms)
+
+    start_time_str = start_time.strftime("%H:%M:%S.%f")[:-3]
+    end_time_str = end_time.strftime("%H:%M:%S.%f")[:-3]
+
+    method = random.choice(METHODS)
     is_success = random.random() < 0.8
 
     if is_success:
-        estado = "SUCCESS"
-        codigo = random.choice([0, 200])
-        detalle = random.choice(SUCCESS_DETAILS)
+        status = "SUCCESS"
+        code = random.choice([0, 200])
+        detail = random.choice(SUCCESS_DETAILS)
     else:
-        estado = "FAILED"
-        codigo = random.choice([1, 400, 500])
-        detalle = random.choice(FAILED_DETAILS)
+        status = "FAILED"
+        code = random.choice([1, 400, 500])
+        detail = random.choice(FAILED_DETAILS)
 
-    return f"{fecha}|{hora_inicio_str}|{hora_final_str}|{latencia_ms}|{metodo}|{detalle}|{estado}|{codigo}\n"
+    return {
+        "date": date,
+        "start_time": start_time_str,
+        "end_time": end_time_str,
+        "latency_ms": latency_ms,
+        "method": method,
+        "detail": detail,
+        "status": status,
+        "code": code
+    }
+
+
+def format_style_1(data):
+    return f"{data['date']}|{data['start_time']}|{data['end_time']}|{data['latency_ms']}|{data['method']}|{data['detail']}|{data['status']}|{data['code']}\n"
+
+
+def format_style_2(data):
+    return f"|{data['date']}|{data['start_time']}|{data['end_time']}|{data['latency_ms']}|{data['method']}|{data['detail']}|{data['status']}|{data['code']}|\n"
 
 
 def main():
     print(f"Generating transaction logs: {log_file.absolute()}")
-    print("Format: date|start_time|end_time|latency|method|detail|status|code\n")
+    print("Format 1: date|start_time|end_time|latency_ms|method|detail|status|code")
+    print("Format 2: |date|start_time|end_time|latency_ms|method|detail|status|code|")
+    print()
 
     try:
         with open(log_file, "a") as f:
+            use_format_1 = True
+
             while True:
-                log_line = generate_transaction_log()
+                transaction_data = generate_transaction_data()
+
+                if use_format_1:
+                    log_line = format_style_1(transaction_data)
+                else:
+                    log_line = format_style_2(transaction_data)
+
                 f.write(log_line)
                 f.flush()
+
                 print(log_line.strip())
-                time.sleep(random.uniform(0.3, 2.0))
+
+                use_format_1 = not use_format_1
+
+                time.sleep(random.uniform(0.1, 0.3))
 
     except KeyboardInterrupt:
         print("\nLog generation stopped.")
