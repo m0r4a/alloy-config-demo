@@ -1,0 +1,5 @@
+import.file "template" {
+	filename = "/etc/alloy/modules/template.alloy"
+}
+
+template.pipeline "parsing" {}
