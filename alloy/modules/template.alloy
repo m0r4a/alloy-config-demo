@@ -23,6 +23,10 @@ declare "pipeline" {
       expression = `^(?P<date>\S+)\|(?P<time_start>\S+)\|(?P<time_end>\S+)\|(?P<latency>\d+)\|(?P<method>[^|]+)\|(?P<details>[^|]+)\|(?P<status>SUCCESS|FAILED)\|(?P<code>\d+)$`
     }
 
+    stage.regex {
+      expression = `^\|(?P<date>\S+)\|(?P<time_start>\S+)\|(?P<time_end>\S+)\|(?P<latency>\d+)\|(?P<method>[^|]+)\|(?P<details>[^|]+)\|(?P<status>SUCCESS|FAILED)\|(?P<code>\d+)\|$`
+    }
+
     stage.labels {
       values = {
         method       = "",
