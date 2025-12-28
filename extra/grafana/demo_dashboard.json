@@ -10,7 +10,7 @@
     },
     {
       "name": "DS_PROMETHEUS",
-      "label": "prometheus",
+      "label": "Prometheus",
       "description": "",
       "type": "datasource",
       "pluginId": "prometheus",
@@ -66,10 +66,10 @@
       }
     ]
   },
+  "description": "A reference dashboard for the alloy-config-template POC, demonstrating modular pipeline architectures, regex log parsing, and metric generation.",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": null,
   "links": [],
   "panels": [
     {
@@ -247,16 +247,16 @@
       "pluginVersion": "12.4.0-20447603318",
       "targets": [
         {
+          "datasource": {
+            "type": "loki",
+            "uid": "${DS_LOKI}"
+          },
           "direction": "backward",
           "editorMode": "code",
           "expr": "sum by (method) (count_over_time({job=\"demo-job\"}[5m]))",
           "legendFormat": "{{method}}",
           "queryType": "range",
-          "refId": "A",
-          "datasource": {
-            "type": "loki",
-            "uid": "${DS_LOKI}"
-          }
+          "refId": "A"
         }
       ],
       "title": "Amount of operations per method",
@@ -350,16 +350,16 @@
       "pluginVersion": "12.4.0-20447603318",
       "targets": [
         {
+          "datasource": {
+            "type": "loki",
+            "uid": "${DS_LOKI}"
+          },
           "direction": "backward",
           "editorMode": "code",
           "expr": "sum by (method) (count_over_time({job=\"demo-job\", status=\"SUCCESS\"}[5m]))\n/\nsum by (method) (count_over_time({job=\"demo-job\"}[5m]))\n* 100",
           "legendFormat": "{{method}}",
           "queryType": "range",
-          "refId": "A",
-          "datasource": {
-            "type": "loki",
-            "uid": "${DS_LOKI}"
-          }
+          "refId": "A"
         }
       ],
       "title": "Effectiveness rate by method",
@@ -443,7 +443,7 @@
           "displayMode": "table",
           "placement": "right",
           "showLegend": true,
-          "width": 180
+          "width": 192
         },
         "tooltip": {
           "hideZeros": false,
@@ -545,7 +545,7 @@
           "displayMode": "table",
           "placement": "right",
           "showLegend": true,
-          "width": 180
+          "width": 192
         },
         "tooltip": {
           "hideZeros": false,
@@ -556,16 +556,16 @@
       "pluginVersion": "12.4.0-20447603318",
       "targets": [
         {
+          "datasource": {
+            "type": "loki",
+            "uid": "${DS_LOKI}"
+          },
           "direction": "backward",
           "editorMode": "code",
           "expr": "sum by (method) (\n  count_over_time({job=\"demo-job\"}[5m])\n)\n/\nsum by (method) (\n  count_over_time({job=\"demo-job\", status=\"FAILED\"}[5m])\n)",
           "legendFormat": "{{method}}",
           "queryType": "range",
-          "refId": "A",
-          "datasource": {
-            "type": "loki",
-            "uid": "${DS_LOKI}"
-          }
+          "refId": "A"
         }
       ],
       "title": "Failures per 100 Transactions (by Method)",
@@ -574,6 +574,7 @@
     }
   ],
   "preload": false,
+  "refresh": "10s",
   "schemaVersion": 42,
   "tags": [],
   "templating": {
@@ -585,8 +586,10 @@
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "Demo",
+  "title": "Alloy Modular Pipeline Demo",
   "uid": "adnvvpk",
-  "version": 20,
-  "weekStart": ""
+  "version": 4,
+  "weekStart": "",
+  "id": null
 }
+
