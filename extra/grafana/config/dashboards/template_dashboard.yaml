@@ -1,4 +1,55 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_LOKI",
+      "label": "Loki",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "loki",
+      "pluginName": "Loki"
+    },
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "12.4.0-20447603318"
+    },
+    {
+      "type": "datasource",
+      "id": "loki",
+      "name": "Loki",
+      "version": "12.4.0-20447603318"
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -18,13 +69,13 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 0,
+  "id": null,
   "links": [],
   "panels": [
     {
       "datasource": {
         "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
+        "uid": "${DS_LOKI}"
       },
       "fieldConfig": {
         "defaults": {
@@ -82,7 +133,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
+            "uid": "${DS_LOKI}"
           },
           "direction": "backward",
           "editorMode": "code",
@@ -112,7 +163,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
+        "uid": "${DS_LOKI}"
       },
       "fieldConfig": {
         "defaults": {
@@ -201,7 +252,11 @@
           "expr": "sum by (method) (count_over_time({job=\"template-job\"}[5m]))",
           "legendFormat": "{{method}}",
           "queryType": "range",
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "loki",
+            "uid": "${DS_LOKI}"
+          }
         }
       ],
       "title": "Amount of operations per method",
@@ -211,7 +266,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
+        "uid": "${DS_LOKI}"
       },
       "fieldConfig": {
         "defaults": {
@@ -300,7 +355,11 @@
           "expr": "sum by (method) (count_over_time({job=\"template-job\", status=\"SUCCESS\"}[5m]))\n/\nsum by (method) (count_over_time({job=\"template-job\"}[5m]))\n* 100",
           "legendFormat": "{{method}}",
           "queryType": "range",
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "loki",
+            "uid": "${DS_LOKI}"
+          }
         }
       ],
       "title": "Effectiveness rate by method",
@@ -310,7 +369,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cf8f5xs859ptsd"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -397,7 +456,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cf8f5xs859ptsd"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "sum by (method) (rate(template_transaction_latency_sum[5m])) \n/ \nsum by (method) (rate(template_transaction_latency_count[5m]))",
@@ -413,7 +472,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
+        "uid": "${DS_LOKI}"
       },
       "fieldConfig": {
         "defaults": {
@@ -502,7 +561,11 @@
           "expr": "sum by (method) (\n  count_over_time({job=\"template-job\"}[5m])\n)\n/\nsum by (method) (\n  count_over_time({job=\"template-job\", status=\"FAILED\"}[5m])\n)",
           "legendFormat": "{{method}}",
           "queryType": "range",
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "loki",
+            "uid": "${DS_LOKI}"
+          }
         }
       ],
       "title": "Failures per 100 Transactions (by Method)",
