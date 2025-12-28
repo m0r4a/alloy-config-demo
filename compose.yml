@@ -44,8 +44,6 @@ services:
     volumes:
       - ./extra/grafana/data:/var/lib/grafana
       - ./extra/grafana/config/datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
-      - ./extra/grafana/config/dashboards.yaml:/etc/grafana/provisioning/dashboards/dashboards.yaml
-      - ./extra/grafana/config/dashboards:/var/lib/grafana/dashboards
     restart: unless-stopped
     networks:
       - alloy
