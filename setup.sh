@@ -15,6 +15,8 @@ chown -R 472:472 extra/grafana
 chown -R 10001:10001 extra/loki
 chown -R 65534:65534 extra/prometheus
 
+touch ./extra/logs/trans.log
+
 chmod -R 755 extra/grafana
 chmod -R 755 extra/loki
 chmod -R 755 extra/prometheus
