@@ -3,3 +3,9 @@ import.file "template" {
 }
 
 template.pipeline "parsing" {}
+
+import.file "failing" {
+	filename = "/etc/alloy/modules/failing.alloy"
+}
+
+failing.pipeline "parsing" {}

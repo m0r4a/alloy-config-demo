@@ -1,0 +1,62 @@
+declare "pipeline" {
+
+  loki.source.file "log" {
+    targets = [
+      {
+        __path__      = "/var/log/trans.log",
+        job           = "failing-job",
+        service_name  = "failing-job",
+      },
+    ]
+
+    forward_to = [loki.process.filter.receiver]
+  }
+
+  loki.process "filter" {
+    stage.static_labels {
+      values = {
+        parse_status = "failed",
+      }
+    }
+
+    stage.regex {
+      expression = `^(?P<date>\S+)\|(?P<time_start>\S+)\|(?P<time_end>\S+)\|(?P<latency>\d+)\|(?P<method>[^|]+)\|(?P<details>[^|]+)\|(?P<status>SUCCESS|FAILED)\|(?P<code>\d+)$`
+    }
+
+    stage.labels {
+      values = {
+        method       = "",
+        status       = "",          // Sets up a 'status' label, based on the 'status' extracted value.
+        status_code  = "code",      // Sets up a 'status_code' label, based on the 'code' extracted value.
+      }
+    }
+
+    stage.match {
+      selector = `{method=~".+"}`
+
+      stage.static_labels {
+        values = {
+          parse_status = "success",
+        }
+      }
+
+      stage.metrics {
+        metric.histogram {
+          name        = "transaction_latency"                  // The metric name.
+          description = "Transaction latency by method"        // The metric's description and help text.
+          source      = "latency"                              // Key from the extracted data map to use for the metric. Defaults to the metric name.
+          prefix      = "template_"                            // The prefix to the metric name.
+       // value       = "latency_"                             // If set, the metric only changes if source exactly matches the value.
+          buckets     = [0.1, 0.5, 1, 2, 5, 10, 30]            // Predefined buckets
+        }
+      }
+    }
+    forward_to = [loki.write.endpoint.receiver]
+  }
+
+  loki.write "endpoint" {
+    endpoint {
+      url = "http://loki:3100/loki/api/v1/push"
+    }
+  }
+}
