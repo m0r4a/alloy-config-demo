@@ -43,7 +43,7 @@ FAILED_DETAILS = [
 def generate_transaction_data():
     date = datetime.now().strftime("%Y-%m-%d")
     start_time = datetime.now()
-    latency_ms = random.randint(10, 1000)
+    latency_ms = random.randint(10, 5000)
     end_time = start_time + timedelta(milliseconds=latency_ms)
 
     start_time_str = start_time.strftime("%H:%M:%S.%f")[:-3]
