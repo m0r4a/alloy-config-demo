@@ -110,7 +110,7 @@ A comprehensive dashboard is available to visualize the pipeline performance and
 1. Access Grafana at `http://localhost:3000`.
 2. Enter de default credentials `admin:admin`.
 3. Navigate to **Dashboards** > **New** > **Import**.
-4. Enter the Dashboard ID: **24613**.
+4. Enter the Dashboard ID: **24614**.
 5. Click **Load**.
 6. Select the **Loki** and **Prometheus** data sources if prompted (these are automatically provisioned by the stack).
 
@@ -121,6 +121,10 @@ The dashboard visualizes:
 * **Pipeline Health**: Real-time tracking of parsing success vs. failure rates.
 * **Business Metrics**: Transaction latency histograms and volume analysis based on the `transaction_latency` metric.
 * **Log Inspection**: Filterable log streams based on extracted labels.
+
+## Dashboard Preview
+
+![./extra/resources/dashboard_preview.png]
 
 ## Disclaimer
 
