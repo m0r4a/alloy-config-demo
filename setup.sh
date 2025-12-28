@@ -20,6 +20,6 @@ touch ./extra/logs/trans.log
 chmod -R 755 extra/grafana
 chmod -R 755 extra/loki
 chmod -R 755 extra/prometheus
-chmod -R 755 extra/logs
+chmod -R 766 extra/logs
 
 echo "Setup complete"
