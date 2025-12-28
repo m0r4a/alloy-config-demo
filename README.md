@@ -124,7 +124,9 @@ The dashboard visualizes:
 
 ## Dashboard Preview
 
-![./extra/resources/dashboard_preview.png]
+<p align="center">
+    <img src="extra/resources/dashboard_preview.png" alt="Dashboard preview"/>
+</p>
 
 ## Disclaimer
 
