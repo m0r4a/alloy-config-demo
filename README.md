@@ -110,7 +110,7 @@ A comprehensive dashboard is available to visualize the pipeline performance and
 1. Access Grafana at `http://localhost:3000`.
 2. Enter de default credentials `admin:admin`.
 3. Navigate to **Dashboards** > **New** > **Import**.
-4. Enter the Dashboard ID: **24612**.
+4. Enter the Dashboard ID: **24613**.
 5. Click **Load**.
 6. Select the **Loki** and **Prometheus** data sources if prompted (these are automatically provisioned by the stack).
 
