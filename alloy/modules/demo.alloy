@@ -4,8 +4,8 @@ declare "pipeline" {
     targets = [
       {
         __path__      = "/var/log/trans.log",
-        job           = "template-job",
-        service_name  = "template-job",
+        job           = "demo-job",
+        service_name  = "demo-job",
       },
     ]
 
@@ -49,7 +49,7 @@ declare "pipeline" {
           name        = "transaction_latency"                  // The metric name.
           description = "Transaction latency by method"        // The metric's description and help text.
           source      = "latency"                              // Key from the extracted data map to use for the metric. Defaults to the metric name.
-          prefix      = "template_"                            // The prefix to the metric name.
+          prefix      = "demo_"                                // The prefix to the metric name.
        // value       = "latency_"                             // If set, the metric only changes if source exactly matches the value.
           buckets     = [0.1, 0.5, 1, 2, 5, 10, 30]            // Predefined buckets
         }

@@ -1,8 +1,8 @@
-import.file "template" {
-	filename = "/etc/alloy/modules/template.alloy"
+import.file "demo" {
+	filename = "/etc/alloy/modules/demo.alloy"
 }
 
-template.pipeline "parsing" {}
+demo.pipeline "parsing" {}
 
 import.file "failing" {
 	filename = "/etc/alloy/modules/failing.alloy"

@@ -157,7 +157,7 @@
       },
       "id": 3,
       "panels": [],
-      "title": "Template service",
+      "title": "Demo service",
       "type": "row"
     },
     {
@@ -249,7 +249,7 @@
         {
           "direction": "backward",
           "editorMode": "code",
-          "expr": "sum by (method) (count_over_time({job=\"template-job\"}[5m]))",
+          "expr": "sum by (method) (count_over_time({job=\"demo-job\"}[5m]))",
           "legendFormat": "{{method}}",
           "queryType": "range",
           "refId": "A",
@@ -352,7 +352,7 @@
         {
           "direction": "backward",
           "editorMode": "code",
-          "expr": "sum by (method) (count_over_time({job=\"template-job\", status=\"SUCCESS\"}[5m]))\n/\nsum by (method) (count_over_time({job=\"template-job\"}[5m]))\n* 100",
+          "expr": "sum by (method) (count_over_time({job=\"demo-job\", status=\"SUCCESS\"}[5m]))\n/\nsum by (method) (count_over_time({job=\"demo-job\"}[5m]))\n* 100",
           "legendFormat": "{{method}}",
           "queryType": "range",
           "refId": "A",
@@ -459,7 +459,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum by (method) (rate(template_transaction_latency_sum[5m])) \n/ \nsum by (method) (rate(template_transaction_latency_count[5m]))",
+          "expr": "sum by (method) (rate(demo_transaction_latency_sum[5m])) \n/ \nsum by (method) (rate(demo_transaction_latency_count[5m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -558,7 +558,7 @@
         {
           "direction": "backward",
           "editorMode": "code",
-          "expr": "sum by (method) (\n  count_over_time({job=\"template-job\"}[5m])\n)\n/\nsum by (method) (\n  count_over_time({job=\"template-job\", status=\"FAILED\"}[5m])\n)",
+          "expr": "sum by (method) (\n  count_over_time({job=\"demo-job\"}[5m])\n)\n/\nsum by (method) (\n  count_over_time({job=\"demo-job\", status=\"FAILED\"}[5m])\n)",
           "legendFormat": "{{method}}",
           "queryType": "range",
           "refId": "A",
@@ -585,7 +585,7 @@
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "Template",
+  "title": "Demo",
   "uid": "adnvvpk",
   "version": 20,
   "weekStart": ""
