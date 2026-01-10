@@ -459,13 +459,13 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum by (method) (rate(demo_transaction_latency_sum[5m])) \n/ \nsum by (method) (rate(demo_transaction_latency_count[5m]))",
+          "expr": "histogram_quantile(\n  0.95,\n  sum by (le, method) (\n    rate(demo_transaction_latency_bucket{status=\"SUCCESS\"}[5m])\n  )\n)",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Average latency per method",
+      "title": "P95 latency per method",
       "transparent": true,
       "type": "timeseries"
     },
@@ -588,8 +588,7 @@
   "timezone": "browser",
   "title": "Alloy Modular Pipeline Demo",
   "uid": "adnvvpk",
-  "version": 4,
+  "version": 2,
   "weekStart": "",
   "id": null
 }
-

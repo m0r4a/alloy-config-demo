@@ -42,12 +42,12 @@ declare "pipeline" {
 
       stage.metrics {
         metric.histogram {
-          name        = "transaction_latency"                  // The metric name.
-          description = "Transaction latency by method"        // The metric's description and help text.
-          source      = "latency"                              // Key from the extracted data map to use for the metric. Defaults to the metric name.
-          prefix      = "template_"                            // The prefix to the metric name.
-       // value       = "latency_"                             // If set, the metric only changes if source exactly matches the value.
-          buckets     = [0.1, 0.5, 1, 2, 5, 10, 30]            // Predefined buckets
+          name        = "transaction_latency"                                    // The metric name.
+          description = "Transaction latency by method"                          // The metric's description and help text.
+          source      = "latency"                                                // Key from the extracted data map to use for the metric. Defaults to the metric name.
+          prefix      = "demo_"                                                  // The prefix to the metric name.
+       // value       = "latency_"                                               // If set, the metric only changes if source exactly matches the value.
+          buckets     = [200, 400, 800, 1200, 2000, 2500, 3000, 4000, 5000]      // Predefined buckets (calculating good buckets is almost imposible in this case since the latency is generated with random values)
         }
       }
     }
